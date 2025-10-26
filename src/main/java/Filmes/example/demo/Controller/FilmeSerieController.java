@@ -21,7 +21,7 @@ public class FilmeSerieController {
     public String listarFilmeSerie(Model model) {
         List<FilmeSerie> filmes = filmeSerieService.findAll();
         model.addAttribute("filmes", filmes);
-        return "listar"; /// nome do html, repetir isso em todos os returns
+        return "home"; /// nome do html, repetir isso em todos os returns
     }
 
     /// Mostra a pagina de visualização especifica
@@ -36,7 +36,7 @@ public class FilmeSerieController {
     @GetMapping("/adicionar")
     public String adicionarFilmeSerie(FilmeSerie filmeSerieAtt, Model model) {
         model.addAttribute("filmeSerie", new FilmeSerie());
-        return "adicionar";
+        return "cadastro";
     }
 
     /// Mostra a pagina de editar um filme

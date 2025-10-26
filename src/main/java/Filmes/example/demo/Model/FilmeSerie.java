@@ -18,7 +18,7 @@ public class FilmeSerie {
     private Long id;
     @NotBlank
     private String titulo;
-    @Size(min = 1, max = 100)
+    @Size(min = 10)
     private String sinopse;
     private String genero;
     private String diretor;

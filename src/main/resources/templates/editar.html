@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="'Editar - ' + ${filmeSerie.titulo}"></title>
+    <style>
+        body { margin: 0; font-family: "Poppins", sans-serif; background-color: #1a1a1a; color: white; }
+        .navbar { display: flex; justify-content: center; gap: 2rem; background-color: #2c3e63; padding: 10px; border-radius: 10px; margin: 15px; }
+        .navbar a {
+            text-decoration: none;
+            color: white;
+            font-weight: bold;
+            padding: 5px 20px;
+            border-radius: 10px;
+        }
+        .navbar a.active, .navbar a:hover {
+            background-color: white;
+            color: #2c3e63;
+        }
+        .detalhes-container {
+            display: flex;
+            justify-content: center;
+            padding: 30px;
+        }
+        .card-filme {
+            display: flex;
+            background-color: #0d1b44;
+            border-radius: 10px;
+            padding: 20px;
+            max-width: 800px;
+            gap: 20px; /* Adicionado para controlar o espaço entre a imagem e o formulário */
+        }
+        .card-filme img {
+            width: 250px;
+            max-height: 400px;
+            object-fit: cover;
+            border-radius: 10px;
+            flex-shrink: 0;
+        }
+        .info-filme {
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .info-filme h2 {
+            margin-top: 0;
+            text-transform: uppercase;
+        }
+        /* Estilos do Formulário */
+        .form-edicao {
+            display: flex;
+            flex-direction: column;
+            gap: 15px;
+        }
+        .form-edicao input, .form-edicao textarea {
+            border: none;
+            outline: none;
+            border-radius: 5px;
+            padding: 10px;
+            font-size: 14px;
+            background-color: #2c3e63;
+            color: white;
+        }
+        .form-edicao textarea {
+            resize: vertical;
+            min-height: 80px;
+        }
+        .form-edicao button {
+            margin-top: 15px;
+            background-color: #3cb44a; /* Cor de destaque para salvar */
+            color: white;
+            font-weight: bold;
+            border: none;
+            border-radius: 20px;
+            padding: 10px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        .form-edicao button:hover {
+            background-color: #4cdb5b;
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <a th:href="@{/filme-serie/listar-todos}">Home</a>
+        <a th:href="@{/filme-serie/adicionar}">Cadastro</a>
+        <a th:href="@{'/filme-serie/editar/' + ${filmeSerie.id}}" class="active">Editar</a>
+    </nav>
+</header>
+<main class="detalhes-container">
+    <form class="card-filme"
+          th:action="@{'/filme-serie/editar/' + ${filmeSerie.id}}"
+          th:object="${filmeSerie}"
+          method="post">
+
+        <img th:src="*{imagem}" th:alt="*{titulo}">
+
+        <div class="info-filme form-edicao">
+            <input type="text"
+                   th:field="*{titulo}"
+                   placeholder="Título do Filme/Série"
+                   required>
+
+            <input type="number"
+                   th:field="*{ano}"
+                   placeholder="Ano de Lançamento"
+                   min="1900"
+                   max="2030"
+                   required>
+
+            <input type="text"
+                   th:field="*{diretor}"
+                   placeholder="Diretor / Criador"
+                   required>
+
+            <input type="text"
+                   th:field="*{genero}"
+                   placeholder="Gênero"
+                   required>
+
+            <textarea
+                    th:field="*{sinopse}"
+                    placeholder="Sinopse Completa"
+                    required></textarea>
+
+            <input type="text"
+                   th:field="*{imagem}"
+                   placeholder="URL da Imagem"
+                   required>
+
+            <input type="hidden" th:field="*{id}" />
+
+            <button type="submit">Salvar Alterações</button>
+
+        </div>
+    </form>
+</main>
+</body>
+</html>

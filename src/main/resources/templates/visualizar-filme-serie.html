@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="pt-BR" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${filmeSerie.titulo} + ' - Detalhes'"></title>
+    <style>
+        body { margin: 0; font-family: "Poppins", sans-serif; background-color: #1a1a1a; color: white; }
+        .navbar { display: flex; justify-content: center; gap: 2rem; background-color: #2c3e63; padding: 10px; border-radius: 10px; margin: 15px; }
+        .navbar a { text-decoration: none; color: white; font-weight: bold; padding: 5px 20px; border-radius: 10px; }
+        .navbar a.active, .navbar a:hover { background-color: white; color: #2c3e63; }
+
+        .detalhe-container {
+            display: flex;
+            padding: 40px;
+            gap: 40px;
+            background-color: #0c142c;
+            min-height: 80vh;
+        }
+
+        .capa-container {
+            flex-shrink: 0;
+            width: 300px;
+            /* Defina a altura para garantir o objeto fit, se a imagem for vertical */
+            height: 450px;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .capa-container img {
+            width: 100%;
+            height: 100%; /* Ajuste para o tamanho do container */
+            border-radius: 10px;
+            /* NOVO: Garante que a imagem preencha o container sem distorcer, cortando o excesso */
+            object-fit: cover;
+        }
+
+        .info-container {
+            flex-grow: 1;
+            padding-top: 20px;
+        }
+
+        .titulo-wrapper {
+            display: flex; /* Permite alinhar o título e o botão */
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+
+        .titulo {
+            font-size: 3.5rem;
+            color: white;
+            text-transform: uppercase;
+            margin: 0; /* Remove margem padrão */
+        }
+
+        /* NOVO ESTILO: Botão EDITAR integrado ao conteúdo */
+        .btn-editar-inline {
+            text-decoration: none;
+            color: white;
+            background-color: #e50914; /* Cor de destaque, como vermelho */
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            font-size: 0.9rem;
+        }
+        .btn-editar-inline:hover {
+            background-color: #ff3838;
+        }
+        /* FIM NOVO ESTILO */
+
+        .sinopse {
+            font-size: 1rem;
+            line-height: 1.6;
+            margin-bottom: 30px;
+            max-width: 800px;
+        }
+
+        .detalhes-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .detalhe-pill {
+            background-color: #2c3e63;
+            color: white;
+            padding: 10px 15px;
+            border-radius: 20px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+    </style>
+</head>
+<body>
+<header>
+    <nav class="navbar">
+        <a th:href="@{/filme-serie/listar-todos}">Home</a>
+        <a th:href="@{/filme-serie/adicionar}">Cadastro</a>
+    </nav>
+</header>
+<main>
+    <section class="detalhe-container">
+        <div class="capa-container">
+            <img th:src="${filmeSerie.imagem}" th:alt="${filmeSerie.titulo}" />
+        </div>
+
+        <div class="info-container">
+            <div class="titulo-wrapper">
+                <h1 class="titulo" th:text="${filmeSerie.titulo}">GAME OF THRONES</h1>
+                <a th:href="@{'/filme-serie/editar/' + ${filmeSerie.id}}" class="btn-editar-inline">EDITAR</a>
+            </div>
+
+            <p class="sinopse" th:text="${filmeSerie.sinopse}">Sinopse detalhada do filme...</p>
+
+            <div class="detalhes-meta">
+                <span class="detalhe-pill" th:text="${filmeSerie.ano}">2011</span>
+                <span class="detalhe-pill" th:text="${filmeSerie.genero}">Fantasia</span>
+                <span class="detalhe-pill">Direção de <span th:text="${filmeSerie.diretor}">David Benioff e D.B. Weiss</span></span>
+            </div>
+        </div>
+    </section>
+</main>
+</body>
+</html>
