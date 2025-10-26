@@ -36,7 +36,7 @@
 </header>
 <main class="home-container">
     <section class="categoria">
-        <h2>Todos os filmes</h2>
+        <h2>Todos os filmes e séries</h2>
         <div class="grid-filmes">
             <div th:each="filme : ${filmes}">
                 <a th:href="@{'/filme-serie/visualizar-filmeserie/' + ${filme.id}}">
