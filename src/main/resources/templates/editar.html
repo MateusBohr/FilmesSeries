@@ -96,7 +96,7 @@
           th:object="${filmeSerie}"
           method="post">
 
-        <img th:src="*{imagem}" th:alt="*{titulo}">
+        <img th:src="${filmeSerie.imagem}" th:alt="${filmeSerie.titulo}">
 
         <div class="info-filme form-edicao">
             <input type="text"
